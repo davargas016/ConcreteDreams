@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7124f8b78fee9a44e91b90fb03eeb694, type: 3}
+  m_Name: piranha-collect
+  m_EditorClassIdentifier: 
+  id: piranha1
+  objective: {fileID: 11400000, guid: 2fb5176a07d680545b0e50f2a1d3dcdf, type: 2}
+  turnInNpcId: np9
+  nextQuest: {fileID: 11400000, guid: 288a90f72deee1d4ea2cd773f44f1146, type: 2}
+  rewardMoney: 3500
+  consumeItemsOnTurnIn: 1
+  consumeAmountOverride: 0
