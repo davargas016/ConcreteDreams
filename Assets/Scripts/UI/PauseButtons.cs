@@ -17,7 +17,7 @@ public class PauseButtons : MonoBehaviour
     {
         // Deactivates the pause menu when Resume is clicked
         pauseMenu.SetActive(false);
-        Time.timeScale = 1; // Optional: resumes the game if you paused time
+        Time.timeScale = 1;
     }
 
 

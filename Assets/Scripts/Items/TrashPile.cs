@@ -85,8 +85,9 @@ public class TrashPile : MonoBehaviour
             return;
         }
 
-        // Build a list of entries that "pass" their roll
-        List<LootEntry> winners = new List<LootEntry>();
+        int totalFound = 0;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
         foreach (var entry in lootTable)
         {
             if (entry == null || entry.item == null) continue;
@@ -94,54 +95,52 @@ public class TrashPile : MonoBehaviour
             int amount = entry.RollAmount();
             if (amount <= 0) continue;
 
-            // Respect 'unique' items: if already owned, don't add more
+            // Respect 'unique' items: if already owned, don't add more.
             if (entry.item.unique && entry.item.numberHeld > 0)
-                continue;
-
-            winners.Add(entry);
-        }
-
-        int totalFound = 0;
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-        if (winners.Count > 0)
-        {
-            // Choose ONE of the successful entries
-            LootEntry chosen = winners[Random.Range(0, winners.Count)];
-
-            // Roll amount once for the chosen entry (or store earlier if you prefer)
-            int amount = chosen.RollAmount();
-            if (amount > 0)
             {
-                int actuallyAdded = AddToInventory(chosen.item, amount);
-                if (actuallyAdded > 0)
-                {
-                    totalFound += actuallyAdded;
-                    sb.AppendLine($"+ {actuallyAdded}x {chosen.item.itemName}");
-                }
+                continue;
+            }
+
+            // Add to the player's inventory (updates the ScriptableObject's numberHeld)
+            int actuallyAdded = AddToInventory(entry.item, amount);
+            if (actuallyAdded > 0)
+            {
+                totalFound += actuallyAdded;
+                sb.AppendLine($"+ {actuallyAdded}x {entry.item.itemName}");
             }
         }
 
-        // Update the inventory UI (your original block)
+        // Update the inventory UI
         if (inventoryManager != null)
         {
             inventoryManager.ClearInventorySlots();
             inventoryManager.MakeInventorySlots();
 
             if (totalFound > 0)
+            {
+                // Brief feedback in the description panel
                 inventoryManager.SetTextAndButton(sb.ToString(), false);
+            }
             else
+            {
                 inventoryManager.SetTextAndButton("Nothing found.", false);
+            }
         }
 
-        // Handle lifecycle (your original block)
+        // Handle lifecycle: destroy, disable, or respawn
         if (destroyAfterLoot)
         {
             if (respawnSeconds > 0f)
+            {
                 StartCoroutine(RespawnRoutine());
+            }
             else
+            {
                 gameObject.SetActive(false);
+            }
         }
+
+        
     }
 
     
