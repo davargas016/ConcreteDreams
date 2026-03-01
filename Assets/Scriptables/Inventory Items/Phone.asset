@@ -18,7 +18,7 @@ MonoBehaviour:
   numberHeld: 0
   usable: 0
   unique: 1
-  priceInCents: 80000
+  priceInCents: 7500
   thisEvent:
     m_PersistentCalls:
       m_Calls: []

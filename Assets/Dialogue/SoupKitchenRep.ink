@@ -39,7 +39,7 @@ Player: Okay, I’ll bring back a flyer from the Soup Kitchen.
 
 Soup Kitchen Rep: Excellent! Once you return and give me the flyer, that will check off your first requirement.
 
-Soup Kitchen Rep: After that, please head over and speak with the Health Center representative to continue the process.  They are located to my right.  
+Soup Kitchen Rep: After that, please head over and speak with the Health Center representative to continue the process.  They are located to my left.  
 
 # unlock:npc3
 
@@ -49,7 +49,7 @@ Soup Kitchen Rep: After that, please head over and speak with the Health Center 
 ==Where==
 Player: Where do I go again?
 
-NPC: To the person on my right.
+NPC: To the person on my left.
 
 *[Thank you]
 ->END    
