@@ -6,8 +6,8 @@ public class DialogueUnlockRegistry : MonoBehaviour
     [System.Serializable]
     public class UnlockEntry
     {
-        public string key;     // e.g. "npc3"
-        public BoolValue flag; // e.g. NPC3_Unlocked
+        public string key;
+        public BoolValue flag; 
     }
 
     [SerializeField] private List<UnlockEntry> entries = new List<UnlockEntry>();

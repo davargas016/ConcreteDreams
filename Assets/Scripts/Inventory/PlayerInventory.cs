@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerInventory : ScriptableObject
 {
     public List<InventoryItem> myInventory = new List<InventoryItem>();
-    public int money; // cents or whatever you store
+    public int money;
 
     public event Action Changed;
 
@@ -59,7 +59,6 @@ public class PlayerInventory : ScriptableObject
     {
         money += amount;
 
-        // notify quest system + UI
         if (QuestManager.I != null)
             QuestManager.I.OnMoneyChanged();
     }
@@ -75,7 +74,6 @@ public class PlayerInventory : ScriptableObject
         return true;
     }
 
-    // Use this if some legacy code still sets money directly
     public void SetMoney(int total)
     {
         money = total;

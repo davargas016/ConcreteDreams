@@ -14,10 +14,6 @@ public class LootEntry
     [Range(0f, 1f)]
     public float dropChance = 1f;
 
-    /// <summary>
-    /// Rolls for this entry and returns how many to award.
-    /// Returns 0 if chance failed or amounts are invalid.
-    /// </summary>
     public int RollAmount()
     {
         if (item == null) return 0;

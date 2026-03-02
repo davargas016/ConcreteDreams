@@ -14,7 +14,6 @@ public class HealthManager : MonoBehaviour
         playerHealth = maxHealth;
     }
 
-    // Call this whenever something changes health
     public void TakeDamage(float amount)
     {
         if (isDead) return;

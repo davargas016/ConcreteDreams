@@ -55,14 +55,6 @@ public class QuestManager : MonoBehaviour
             Recalculate(q);
     }
 
-    // -------------------------
-    // IMPORTANT: CENTRAL METHODS
-    // -------------------------
-
-    /// <summary>
-    /// Call this whenever an item is gained (flyer from dialogue, fish from fishing, etc.).
-    /// This updates inventory AND refreshes objectives + UI.
-    /// </summary>
     public void GiveItem(InventoryItem item, int amount = 1)
     {
         if (playerInventory == null || item == null || amount <= 0) return;
@@ -72,30 +64,21 @@ public class QuestManager : MonoBehaviour
 
         item.numberHeld += amount;
 
-        OnItemChanged(); // recompute + UI update
+        OnItemChanged();
     }
 
-    /// <summary>
-    /// Call this whenever money changes.
-    /// </summary>
     public void OnMoneyChanged()
     {
         RecalculateAll();
         OnObjectivesChanged?.Invoke();
     }
 
-    /// <summary>
-    /// Call this whenever inventory changes (item gained/removed) if you updated inventory elsewhere.
-    /// </summary>
     public void OnItemChanged()
     {
         RecalculateAll();
         OnObjectivesChanged?.Invoke();
     }
 
-    // -------------------------
-    // NPC TURN-IN
-    // -------------------------
     public void OnTalkToNpc(string npcId)
     {
         RecalculateAll();
@@ -114,7 +97,6 @@ public class QuestManager : MonoBehaviour
 
     void TurnIn(QuestInstance q)
     {
-        // Consume items only if quest says so AND objective is CollectItemObjective
         if (q.def.consumeItemsOnTurnIn && q.def.objective is CollectItemObjective collectObj)
         {
             int toConsume = (q.def.consumeAmountOverride > 0)
@@ -125,24 +107,19 @@ public class QuestManager : MonoBehaviour
                 playerInventory.RemoveItemByName(collectObj.itemName, toConsume);
         }
 
-        // Mark completed
         Completed.Add(q.def.id);
 
-        // Reward
         if (q.def.rewardMoney > 0 && playerInventory != null)
             {
             playerInventory.AddMoney(q.def.rewardMoney);
             itemSignal.Raise();
             }
 
-        // Remove from active list (objective disappears from UI)
         Active.Remove(q);
 
-        // Start chain
         if (q.def.nextQuest != null)
             AddQuest(q.def.nextQuest);
 
-        // Refresh objectives/UI
         RecalculateAll();
         OnObjectivesChanged?.Invoke();
     }

@@ -22,7 +22,6 @@ public class NotificationListener : MonoBehaviour
 
     private void OnNotificationRaised()
     {
-        // Your reaction to the notification — enable canvas, etc.
         GetComponent<BranchingDialogueController>().EnableCanvas();
     }
 }

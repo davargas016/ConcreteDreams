@@ -24,7 +24,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthRestore: 0
-  hungerAmount: 0
-  thirstAmount: 0
+  hungerAmount: 4
+  thirstAmount: 2
   category: 0
   sellable: 1

@@ -15,7 +15,6 @@ public class PauseButtons : MonoBehaviour
 
     public void ResumeButton()
     {
-        // Deactivates the pause menu when Resume is clicked
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }

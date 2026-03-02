@@ -33,7 +33,6 @@ public class ShopManager : MonoBehaviour
     public ShopMode mode = ShopMode.Buy;
     public InventoryItem currentItem;
 
-    // Called by ShopToggle when opening with a specific NPC
     public void OpenVendor(Vendor vendor)
     {
         currentVendor = vendor;
@@ -46,7 +45,6 @@ public class ShopManager : MonoBehaviour
         RefreshShopUI();
     }
 
-    // Hook these to your UI tab buttons
     public void BuyTabPressed()
     {
         mode = ShopMode.Buy;
@@ -121,7 +119,6 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    // The key rule-set for two vendors
     private bool VendorWillBuy(InventoryItem item)
     {
         if (!item.sellable) return false;
@@ -165,7 +162,6 @@ public class ShopManager : MonoBehaviour
         UpdateActionButtonVisual();
     }
 
-    // Hook your Action button OnClick to this
     public void ActionButtonPressed()
     {
         if (currentItem == null || playerInventory == null) return;
@@ -174,17 +170,13 @@ public class ShopManager : MonoBehaviour
         else SellSelected();
     }
 
-    // -----------------------------
-    // FIX: Notify quests + UI
-    // -----------------------------
+
     private void NotifyQuestSystemAfterInventoryOrMoneyChange()
     {
         if (QuestManager.I == null) return;
 
-        // Money objectives (like Collect Money) rely on this
         QuestManager.I.OnMoneyChanged();
 
-        // Item objectives (like Collect Flyer / Catch Fish) rely on this
         QuestManager.I.OnItemChanged();
     }
 
@@ -195,14 +187,11 @@ public class ShopManager : MonoBehaviour
         if (playerInventory.money < cost) return;
         if (currentItem.unique && PlayerHasItem(currentItem)) return;
 
-        // Money change
         playerInventory.money -= cost;
         if (moneySignal != null) moneySignal.Raise();
 
-        // Item change
         AddItemToPlayerInventory(currentItem, 1);
 
-        // ✅ FIX: Update quests + quest UI immediately
         NotifyQuestSystemAfterInventoryOrMoneyChange();
 
     }
@@ -214,18 +203,14 @@ public class ShopManager : MonoBehaviour
 
         int payout = GetSellPrice(currentItem);
 
-        // Item change
         currentItem.numberHeld -= 1;
         if (currentItem.numberHeld < 0) currentItem.numberHeld = 0;
 
-        // Money change
         playerInventory.money += payout;
         if (moneySignal != null) moneySignal.Raise();
 
-        // ✅ FIX: Update quests + quest UI immediately
         NotifyQuestSystemAfterInventoryOrMoneyChange();
-
-        // Refresh sell list so items vanish at 0 and vendor filtering applies
+        
         RefreshShopUI();
     }
 

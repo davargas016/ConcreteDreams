@@ -51,16 +51,13 @@ public class Portal : MonoBehaviour
 
         if (fader != null) yield return fader.FadeTo(1f, fadeOutTime);
 
-        // teleport
         SpawnPoint target = FindSpawnPoint(targetSpawnId);
         if (target != null) player.position = target.transform.position;
         else Debug.LogWarning($"SpawnPoint '{targetSpawnId}' not found.");
 
-        // toggle zones
         if (zoneToEnable != null) zoneToEnable.SetActive(true);
         if (zoneToDisable != null) zoneToDisable.SetActive(false);
 
-        // After enabling/disabling zones:
         if (zoneToEnable != null)
         {
             var zoneInfo = zoneToEnable.GetComponent<FishingZoneInfo>();

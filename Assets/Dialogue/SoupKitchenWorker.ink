@@ -91,7 +91,10 @@ Soup Kitchen Worker: I’m glad you took the time to learn about us.
 
 Soup Kitchen Worker: Here — take one of our flyers. It explains our services and how we partner with other community organizations and shows that you visited us.
 
+Soup Kitchen Worker: Also take this meal.  It's a sandwich so you have something to eat later today.
+
 # give_item:Flyer
+# give_item:Sandwich
 # unlock:npc4
 *[Thank you]
     -> Next

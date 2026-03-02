@@ -10,7 +10,7 @@ public class NPCMovement : MonoBehaviour
 
     [Header("Patrol Points")]
     public Transform[] patrolPoints;
-    public Transform pointA; // fallback if patrolPoints empty
+    public Transform pointA;
     public Transform pointB;
 
     [Header("Patrol Behaviour")]
@@ -25,7 +25,7 @@ public class NPCMovement : MonoBehaviour
     public string paramMoving = "moving";
 
     [Header("Waypoint Options")]
-    public bool cacheWaypointPositions = true; // set true if waypoints are children of NPC
+    public bool cacheWaypointPositions = true;
 
     private Rigidbody2D rb;
     private Animator animator;

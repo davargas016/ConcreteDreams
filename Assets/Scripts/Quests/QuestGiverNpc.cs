@@ -19,7 +19,6 @@ public class QuestGiverNpc : MonoBehaviour
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
 
-            Debug.Log($"[QuestGiverNpc] Pressed E on NPC: {npcId}");
             if (unlockedFlag == null || unlockedFlag.value)
             {   
                 if (QuestManager.I == null)
@@ -59,10 +58,8 @@ public class QuestGiverNpc : MonoBehaviour
         {
             playerInRange = true;
 
-            // Optional: only show prompt if unlocked
             if (unlockedFlag == null || unlockedFlag.value) contextOn?.Raise();
 
-            Debug.Log($"[QuestGiverNpc] Player entered range of {npcId}");
         }
     }
 
@@ -72,7 +69,6 @@ public class QuestGiverNpc : MonoBehaviour
         {
             contextOff?.Raise();
             playerInRange = false;
-            Debug.Log($"[QuestGiverNpc] Player left range of {npcId}");
         }
     }
 }

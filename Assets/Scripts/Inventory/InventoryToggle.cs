@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InventoryToggle : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject inventoryScreen;
 
     // Update is called once per frame

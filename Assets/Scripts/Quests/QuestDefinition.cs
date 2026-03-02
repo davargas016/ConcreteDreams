@@ -10,9 +10,8 @@ public class QuestDefinition : ScriptableObject
     public int rewardMoney;
 
     [Header("Turn-in Behavior (optional)")]
-    [Tooltip("If true and the objective is CollectItemObjective, items will be removed from inventory when turned in.")]
     public bool consumeItemsOnTurnIn = false;
 
-    [Tooltip("If > 0, use this amount to consume instead of the objective's requiredAmount.")]
+    [Tooltip("If > 0, will consume amount entered")]
     public int consumeAmountOverride = 0;
 }

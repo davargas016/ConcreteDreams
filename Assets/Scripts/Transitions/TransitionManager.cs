@@ -7,7 +7,7 @@ public class TransitionManager : MonoBehaviour
     public static TransitionManager Instance { get; private set; }
 
     [Header("Optional: assign a screen fader (see ISceneFader below)")]
-    public MonoBehaviour faderBehaviour; // must implement ISceneFader
+    public MonoBehaviour faderBehaviour;
     private ISceneFader _fader;
 
     private string _nextSpawnId;
@@ -45,14 +45,11 @@ public class TransitionManager : MonoBehaviour
         var op = SceneManager.LoadSceneAsync(sceneName);
         while (!op.isDone) yield return null;
 
-        // OnSceneLoaded will position the player.
-
         if (_fader != null) yield return _fader.FadeIn(fadeDuration);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Find player (either persistent or created in scene)
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
@@ -63,7 +60,6 @@ public class TransitionManager : MonoBehaviour
         if (string.IsNullOrEmpty(_nextSpawnId))
             return;
 
-        // Find spawn point by ID
         var spawns = GameObject.FindObjectsOfType<SpawnPoint>();
         foreach (var sp in spawns)
         {
@@ -80,7 +76,6 @@ public class TransitionManager : MonoBehaviour
     }
 }
 
-// Optional fader interface (implement if you want fades)
 public interface ISceneFader
 {
     IEnumerator FadeOut(float duration);

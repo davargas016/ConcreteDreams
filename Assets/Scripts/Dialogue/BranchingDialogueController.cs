@@ -23,7 +23,6 @@ public class BranchingDialogueController : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private PlayerInventory playerInventory;
 
-    // NEW: Drag ALL possible InventoryItem assets here (Health Flyer, Quest Item, etc.)
     [SerializeField] private List<InventoryItem> allItems = new List<InventoryItem>();
 
     private Story myStory;
@@ -79,7 +78,6 @@ public class BranchingDialogueController : MonoBehaviour
             string newLine = myStory.Continue();
             MakeNewDialogue(newLine);
 
-            // process tags emitted by this line
             HandleTags(myStory.currentTags);
         }
 
@@ -105,7 +103,6 @@ public class BranchingDialogueController : MonoBehaviour
             if (string.IsNullOrWhiteSpace(raw)) continue;
             string tag = raw.Trim();
 
-            // ---------- UNLOCK ----------
             if (tag.StartsWith("unlock:", System.StringComparison.OrdinalIgnoreCase))
             {
                 if (unlockRegistry == null)
@@ -119,7 +116,6 @@ public class BranchingDialogueController : MonoBehaviour
                 Debug.Log($"Unlocked NPC: {key}");
             }
 
-            // ---------- LOCK ----------
             else if (tag.StartsWith("lock:", System.StringComparison.OrdinalIgnoreCase))
             {
                 if (unlockRegistry == null)
@@ -133,7 +129,6 @@ public class BranchingDialogueController : MonoBehaviour
                 Debug.Log($"Locked NPC: {key}");
             }
 
-            // ---------- GIVE ITEM ----------
             else if (tag.StartsWith("give_item:", System.StringComparison.OrdinalIgnoreCase))
             {
                 string itemName = tag.Substring("give_item:".Length).Trim();
@@ -152,7 +147,6 @@ public class BranchingDialogueController : MonoBehaviour
 
                 InventoryItem foundItem = null;
 
-                // Look up the InventoryItem from the master list (NOT the player's current inventory)
                 foreach (var item in allItems)
                 {
                     if (item != null && item.itemName == itemName)

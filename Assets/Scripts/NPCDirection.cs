@@ -15,15 +15,12 @@ public class NPCDirection : MonoBehaviour
     {
         if (!animator) animator = GetComponent<Animator>();
 
-        // Ensure we're in idle
         animator.SetBool(MovingHash, false);
 
-        // Set blend-tree direction inputs
         Vector2 dir = FacingToVector(startFacing);
         animator.SetFloat(MoveXHash, dir.x);
         animator.SetFloat(MoveYHash, dir.y);
 
-        // Optional: make it visually correct immediately
         animator.Update(0f);
     }
 

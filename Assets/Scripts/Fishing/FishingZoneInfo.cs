@@ -1,4 +1,3 @@
-// FishingZoneInfo.cs
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -20,7 +19,7 @@ public class FishingZoneInfo : MonoBehaviour
         FishingController fc = other.GetComponent<FishingController>();
         if (fc != null)
         {
-            fc.SetCurrentZone(this); // 'this' is FishingZoneInfo -> correct type
+            fc.SetCurrentZone(this);
         }
     }
 

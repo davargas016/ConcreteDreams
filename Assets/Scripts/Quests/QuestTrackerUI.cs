@@ -10,7 +10,6 @@ public class QuestTrackerUI : MonoBehaviour
 
     void Update()
     {
-        // Late subscribe (fixes load-order / enable-order issues)
         if (!subscribed && QuestManager.I != null)
         {
             QuestManager.I.OnObjectivesChanged += Refresh;

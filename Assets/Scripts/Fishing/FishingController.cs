@@ -18,8 +18,8 @@ public class FishingController : MonoBehaviour
     public KeyCode cancelKey = KeyCode.Escape;
 
     [Header("Requirements")]
-    public InventoryItem fishingRodItem; // Must be owned (numberHeld > 0)
-    public InventoryItem baitItem;       // Consumed when bite happens (numberHeld--)
+    public InventoryItem fishingRodItem;
+    public InventoryItem baitItem;
 
     [Header("Timing (seconds)")]
     public float minBiteWait = 1.5f;
@@ -29,12 +29,12 @@ public class FishingController : MonoBehaviour
     public float failDelaySeconds = 0.75f;
 
     [Header("References")]
-    public PlayerMovement playerMovement;       // to lock movement
-    public Animator animator;                   // your idle/walk animator
-    public SpriteRenderer mainRenderer;         // the animated renderer (on player)
-    public GameObject fishingVisual;            // child object with SpriteRenderer for static fishing sprite
-    public FishingIconDisplay iconDisplay;      // child icon controller
-    public InventoryManager inventoryManager;   // optional for UI refresh/toast
+    public PlayerMovement playerMovement;
+    public Animator animator;
+    public SpriteRenderer mainRenderer;
+    public GameObject fishingVisual;
+    public FishingIconDisplay iconDisplay;
+    public InventoryManager inventoryManager;
 
     [Header("Fishing Sprites (Directional)")]
     [Tooltip("If a directional sprite is missing, it will fall back to Down if assigned.")]
@@ -44,7 +44,7 @@ public class FishingController : MonoBehaviour
     public Sprite fishingRight;
 
     [Header("Zone")]
-    public FishingZoneInfo currentZone;         // set this when teleporting (or set in scene)
+    public FishingZoneInfo currentZone;
     [Tooltip("If true, will try to auto-find an active FishingZoneInfo on start.")]
     public bool autoFindZoneOnStart = true;
 
@@ -74,7 +74,6 @@ public class FishingController : MonoBehaviour
     {
         if (autoFindZoneOnStart && currentZone == null)
         {
-            // find any enabled zone info (works with your enable/disable zones)
             var zones = FindObjectsOfType<FishingZoneInfo>(true);
             foreach (var z in zones)
             {
@@ -89,13 +88,10 @@ public class FishingController : MonoBehaviour
 
     private void Update()
     {
-        // Block fishing if paused
         if (Time.timeScale <= 0f) return;
 
-        // Block fishing if shop is open
         if (ShopToggle.shopOpen) return;
 
-        // Cancel checks
         if (_state != FishingState.Idle)
         {
             if (Input.GetKeyDown(cancelKey) || MovementInputPressed())
@@ -114,7 +110,6 @@ public class FishingController : MonoBehaviour
         }
         else if (_state == FishingState.BiteWindow)
         {
-            // Accept hook input only in bite window
             if (Input.GetKeyDown(castKey) || Input.GetMouseButtonDown(0))
             {
                 _hookPressed = true;
@@ -122,7 +117,6 @@ public class FishingController : MonoBehaviour
         }
         else
         {
-            // Optional: if player presses F while waiting, treat as cancel/reel-in
             if ((_state == FishingState.WaitingForBite || _state == FishingState.Cast) && Input.GetKeyDown(castKey))
             {
                 CancelFishing();
@@ -140,7 +134,6 @@ public class FishingController : MonoBehaviour
     {
         if (!CanStartFishing(out string reason))
         {
-            // Debug.Log($"Can't fish: {reason}");
             return;
         }
 
@@ -163,21 +156,18 @@ public class FishingController : MonoBehaviour
             return false;
         }
 
-        // Must have rod
         if (fishingRodItem != null && fishingRodItem.numberHeld <= 0)
         {
             reason = "No fishing rod.";
             return false;
         }
 
-        // Must have bait?
         if (baitItem != null && baitItem.numberHeld <= 0)
         {
             reason = "No bait.";
             return false;
         }
 
-        // Must be facing water
         Vector2Int facing = GetFacingCardinal();
         if (!IsWaterInFront(facing))
         {
@@ -194,7 +184,7 @@ public class FishingController : MonoBehaviour
         LockMovement(true);
 
         _state = FishingState.Cast;
-        yield return null; // 1 frame
+        yield return null;
 
         _state = FishingState.WaitingForBite;
 
@@ -210,7 +200,6 @@ public class FishingController : MonoBehaviour
         if (_state != FishingState.WaitingForBite)
             yield break;
 
-        // Bite happens now: consume bait on bite (regardless of success)
         if (baitItem != null && baitItem.numberHeld > 0)
         {
             baitItem.numberHeld -= 1;
@@ -308,17 +297,14 @@ public class FishingController : MonoBehaviour
             animator.SetBool(movingParam, false);
     }
 
-    // ---------- Directional Fishing Visuals ----------
     private void EnterFishingVisuals()
     {
-        // Hide animated player renderer (Animator can keep running to preserve facing floats)
         if (mainRenderer != null) mainRenderer.enabled = false;
 
         if (fishingVisual != null)
         {
             fishingVisual.SetActive(true);
 
-            // Choose the correct fishing sprite based on facing direction
             var sr = fishingVisual.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
@@ -330,7 +316,6 @@ public class FishingController : MonoBehaviour
 
     private Sprite GetFishingSpriteForFacing(Vector2Int facing)
     {
-        // Default fallback
         Sprite fallback = fishingDown != null ? fishingDown : fishingRight != null ? fishingRight :
                           fishingLeft != null ? fishingLeft : fishingUp;
 

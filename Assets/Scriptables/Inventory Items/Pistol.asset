@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   itemName: Pistol
-  itemDescription: I wonder if a shark ever touched this or if it maybe belonged
-    to von?
+  itemDescription: I'm not sure if I should sell this or turn it in to the police
   itemImage: {fileID: 3872409701040852596, guid: 96afb157c13cedd4da40920724b8c947, type: 3}
   numberHeld: 0
   usable: 0
   unique: 0
-  priceInCents: 30000
+  priceInCents: 20000
   thisEvent:
     m_PersistentCalls:
       m_Calls: []

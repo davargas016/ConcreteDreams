@@ -6,9 +6,9 @@ public class FishingIconDisplay : MonoBehaviour
     [SerializeField] private SpriteRenderer iconRenderer;
 
     [Header("Sprites")]
-    public Sprite biteSprite;     // "!"
-    public Sprite successSprite;  // "check"
-    public Sprite failSprite;     // "X"
+    public Sprite biteSprite;
+    public Sprite successSprite;
+    public Sprite failSprite;
 
     private void Awake()
     {

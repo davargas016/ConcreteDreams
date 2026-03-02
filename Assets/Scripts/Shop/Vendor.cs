@@ -16,5 +16,5 @@ public class Vendor : MonoBehaviour
     public List<InventoryItem> itemsForSale = new List<InventoryItem>();
 
     [Header("Sell payout percent (of buy price)")]
-    [Range(0f, 1f)] public float sellPercent = 0.8f; // default 80%
+    [Range(0f, 1f)] public float sellPercent = 0.8f;
 }

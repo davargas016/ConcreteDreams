@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Objectives/ReachMoney")]
 public class ReachMoneyObjective : ObjectiveDefinition
 {
-    public int requiredMoney; // stored in cents
+    public int requiredMoney;
 
     public override bool IsSatisfied(PlayerInventory inv)
     {

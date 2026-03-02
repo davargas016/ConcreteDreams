@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[ExecuteAlways] // also works in editor
+[ExecuteAlways]
 public class LockUIScale : MonoBehaviour
 {
     [SerializeField] private Vector3 lockedScale = Vector3.one;

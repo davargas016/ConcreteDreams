@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Only needed if you wire a prompt text
 
 [RequireComponent(typeof(Collider2D))]
 public class TrashPile : MonoBehaviour
@@ -29,19 +28,17 @@ public class TrashPile : MonoBehaviour
     public Signal contextOn;
     public Signal contextOff;
 
-    // State
     private bool playerInRange = false;
     private Collider2D col;
 
     private void Awake()
     {
         col = GetComponent<Collider2D>();
-        col.isTrigger = true; // This script expects trigger behavior
+        col.isTrigger = true;
     }
 
     private void Start()
     {
-        // Fallback: try to pull PlayerInventory from InventoryManager if not assigned
         if (playerInventory == null && inventoryManager != null)
         {
             playerInventory = inventoryManager.playerInventory;
@@ -95,13 +92,11 @@ public class TrashPile : MonoBehaviour
             int amount = entry.RollAmount();
             if (amount <= 0) continue;
 
-            // Respect 'unique' items: if already owned, don't add more.
             if (entry.item.unique && entry.item.numberHeld > 0)
             {
                 continue;
             }
 
-            // Add to the player's inventory (updates the ScriptableObject's numberHeld)
             int actuallyAdded = AddToInventory(entry.item, amount);
             if (actuallyAdded > 0)
             {
@@ -110,7 +105,6 @@ public class TrashPile : MonoBehaviour
             }
         }
 
-        // Update the inventory UI
         if (inventoryManager != null)
         {
             inventoryManager.ClearInventorySlots();
@@ -118,7 +112,6 @@ public class TrashPile : MonoBehaviour
 
             if (totalFound > 0)
             {
-                // Brief feedback in the description panel
                 inventoryManager.SetTextAndButton(sb.ToString(), false);
             }
             else
@@ -127,7 +120,6 @@ public class TrashPile : MonoBehaviour
             }
         }
 
-        // Handle lifecycle: destroy, disable, or respawn
         if (destroyAfterLoot)
         {
             if (respawnSeconds > 0f)
@@ -148,12 +140,8 @@ public class TrashPile : MonoBehaviour
     {
         if (item == null || amount <= 0) return 0;
 
-        // The InventoryManager expects that playerInventory.myInventory contains the canonical list of InventoryItems.
-        // We just bump the ScriptableObject's numberHeld field.
-        // (If you later add a dedicated AddItem API on PlayerInventory, call it here instead.)
         item.numberHeld += amount;
 
-        // Unique safeguard: if unique and we overshot, clamp to 1
         if (item.unique && item.numberHeld > 1)
         {
             int overshoot = item.numberHeld - 1;
@@ -166,7 +154,6 @@ public class TrashPile : MonoBehaviour
 
     private IEnumerator RespawnRoutine()
     {
-        // Disable interaction while “gone”
         col.enabled = false;
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -175,7 +162,6 @@ public class TrashPile : MonoBehaviour
 
         yield return new WaitForSeconds(respawnSeconds);
 
-        // Re-enable
         col.enabled = true;
         for (int i = 0; i < transform.childCount; i++)
         {

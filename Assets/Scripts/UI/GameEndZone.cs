@@ -23,15 +23,12 @@ public class GameEndZone : MonoBehaviour
 
         triggered = true;
 
-        // Disable player movement
         if (playerMovementScript != null)
             playerMovementScript.enabled = false;
 
-        // Show Game Over UI
         if (gameOverScreen != null)
             gameOverScreen.SetActive(true);
 
-        // Freeze the game
         if (freezeTime)
             Time.timeScale = 0f;
     }
