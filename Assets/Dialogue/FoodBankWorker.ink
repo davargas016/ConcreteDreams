@@ -109,11 +109,3 @@ Player: Thank you.
 Food Bank Worker: You’re welcome. Access to food is one of the foundations of stability.
 
 -> END
-
-
-// SOURCES FOR STATISTICS (not spoken in dialogue):
-// Feeding America – Hunger & Impact Data:
-// https://www.feedingamerica.org/hunger-in-america
-//
-// USDA – Food Security in the United States Reports:
-// https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-u-s/

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goldfish
   m_EditorClassIdentifier: 
   itemName: Goldfish
-  itemDescription: 
+  itemDescription: I wonder if I can sell this to the county fair
   itemImage: {fileID: -8620815523503037498, guid: a1168facfaac30143963355ec1b6c578, type: 3}
   numberHeld: 0
   usable: 1

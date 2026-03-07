@@ -104,11 +104,3 @@ Player: Thank you.
 Health Center Worker: You’re welcome. Knowledge is a powerful first step.
 
 -> END
-
-
-// SOURCES FOR STATISTICS (not spoken in dialogue):
-// Health Resources & Services Administration (HRSA):
-// https://bphc.hrsa.gov/about-health-centers/health-center-data
-//
-// National Association of Community Health Centers (NACHC):
-// https://www.nachc.org/research-and-data/

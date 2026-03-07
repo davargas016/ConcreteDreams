@@ -105,11 +105,3 @@ Player: Thank you. I appreciate it.
 Soup Kitchen Worker: You’re welcome. Stay safe — and come back anytime you need a meal.
 
 -> END
-
-
-// SOURCES FOR STATISTICS (not spoken in dialogue):
-// Feeding America – Impact Statistics:
-// https://www.feedingamerica.org/hunger-in-america
-//
-// USDA – Food Security in the U.S. Reports:
-// https://www.ers.usda.gov/topics/food-nutrition-assistance/food-security-in-the-u-s/

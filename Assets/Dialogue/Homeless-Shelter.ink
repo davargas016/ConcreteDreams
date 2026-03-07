@@ -141,12 +141,3 @@ Player: Okay, I'll go right now and begin the process.  Thank you for your help!
 
 *[End]
 -> END
-
-
-
-// SOURCES FOR STATISTICS (not spoken in dialogue):
-// HUD Annual Homeless Assessment Report (AHAR):
-// https://www.huduser.gov/portal/datasets/ahar.html
-//
-// U.S. Census Bureau – Living in Shelters Report:
-// https://www.census.gov/library/stories/2024/02/living-in-shelters.html
